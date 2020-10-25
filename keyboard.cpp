@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "include/kernel.h"
 #include "include/io/keyboard.h"
 
 KeyboardDriver::KeyboardDriver(InterruptManager* manager)
@@ -37,6 +38,7 @@ commandport(0x64) {
 KeyboardDriver::~KeyboardDriver() {}
 
 void printf(char*);
+void WriteCharacter(unsigned char c, unsigned char forecolour, unsigned char backcolour, int x, int y);
 
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
     uint8_t key = dataport.Read();
@@ -86,7 +88,10 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
             case 0x34: printf("."); break;
             case 0x35: printf("-"); break;
 
-            case 0x1C: printf("\n"); break;
+            case 0x1C: 
+            	printf("\n"); 
+            	printf(BUFFER);
+            	break;
             case 0x39: printf(" "); break;
 
             default: {

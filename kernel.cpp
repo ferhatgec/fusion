@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "include/kernel.h"
 #include "include/types.h"
 #include "include/gdt/gdt.h"
 #include "include/interrupts.h"
@@ -62,13 +63,15 @@ extern "C" void callConstructors() {
 }
 
 
-
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
-    printf("fusion~ $# ");
+    printf(BUFFER);
 
     GlobalDescriptorTable gdt;
+ 
+  
     InterruptManager interrupts(0x20, &gdt);
     KeyboardDriver keyboard(&interrupts);
+
     interrupts.Activate();
 
     while(1);
