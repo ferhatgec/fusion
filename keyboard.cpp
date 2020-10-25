@@ -107,6 +107,7 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
             case 0x1C: 
             	printf("\n", GRAY_COLOR, 0); 
             	printf(BUFFER, BROWN_COLOR, 0);
+            	printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
             	break;
             case 0x39: printf(" ", GRAY_COLOR, 0); break;
 
