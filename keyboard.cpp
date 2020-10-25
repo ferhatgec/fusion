@@ -39,6 +39,7 @@ commandport(0x64) {
 KeyboardDriver::~KeyboardDriver() {}
 
 void printf(char*);
+void write_string(int colour, const char *string);
 
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
     uint8_t key = dataport.Read();

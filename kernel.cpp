@@ -21,6 +21,15 @@
 #include "include/interrupts.h"
 #include "include/io/keyboard.h"
 
+void write_string(int colour, const char *string) {
+    volatile char *video = (volatile char*)0xB8000;
+    
+    while(*string != 0) {
+        *video++ = *string++;
+        *video++ = colour;
+    }
+}
+
 
 void printf(char* str) {
     static uint16_t* VideoMemory = (uint16_t*)0xb8000;
@@ -62,10 +71,16 @@ extern "C" void callConstructors() {
         (*i)();
 }
 
+void outb(unsigned short port, char data) {
+    asm volatile("out %0,%1"
+                 :
+                 : "a"(data), "d"(port));
+}
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
-    printf(BUFFER);
-
+    /* Same with rcolorized */
+    write_string(11, BUFFER);
+    	
     GlobalDescriptorTable gdt;
  
   
