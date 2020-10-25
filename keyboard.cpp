@@ -18,6 +18,7 @@
 #include "include/kernel.h"
 #include "include/io/keyboard.h"
 #include "include/io/layout.h"
+#include "include/vga/vga.h"
 
 KeyboardDriver::KeyboardDriver(InterruptManager* manager)
 : InterruptHandler(manager, 0x21),
@@ -44,69 +45,70 @@ void write_string(int colour, const char *string);
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
     uint8_t key = dataport.Read();
     
+    
     if(key < 0x80) {
         switch(key) {
-            case 0x02: printf("1", 2, 0); break;
-            case 0x03: printf("2", 2, 0); break;
-            case 0x04: printf("3", 2, 0); break;
-            case 0x05: printf("4", 2, 0); break;
-            case 0x06: printf("5", 2, 0); break;
-            case 0x07: printf("6", 2, 0); break;
-            case 0x08: printf("7", 2, 0); break;
-            case 0x09: printf("8", 2, 0); break;
-            case 0x0A: printf("9", 2, 0); break;
-            case 0x0B: printf("0", 2, 0); break;
+            case 0x02: printf("1", GRAY_COLOR, 0); break;
+            case 0x03: printf("2", GRAY_COLOR, 0); break;
+            case 0x04: printf("3", GRAY_COLOR, 0); break;
+            case 0x05: printf("4", GRAY_COLOR, 0); break;
+            case 0x06: printf("5", GRAY_COLOR, 0); break;
+            case 0x07: printf("6", GRAY_COLOR, 0); break;
+            case 0x08: printf("7", GRAY_COLOR, 0); break;
+            case 0x09: printf("8", GRAY_COLOR, 0); break;
+            case 0x0A: printf("9", GRAY_COLOR, 0); break;
+            case 0x0B: printf("0", GRAY_COLOR, 0); break;
 
-            case 0x10: printf("q", 2, 0); break;
-            case 0x11: printf("w", 2, 0); break;
-            case 0x12: printf("e", 2, 0); break;
-            case 0x13: printf("r", 2, 0); break;
-            case 0x14: printf("t", 2, 0); break;
+            case 0x10: printf("q", GRAY_COLOR, 0); break;
+            case 0x11: printf("w", GRAY_COLOR, 0); break;
+            case 0x12: printf("e", GRAY_COLOR, 0); break;
+            case 0x13: printf("r", GRAY_COLOR, 0); break;
+            case 0x14: printf("t", GRAY_COLOR, 0); break;
             
 	    	case 0x15: 
 	    		if(DEFAULT_LAYOUT == "de_DE")
-	    			printf("z", 2, 0);
+	    			printf("z", GRAY_COLOR, 0);
             	else
-            		printf("y", 2, 0);
+            		printf("y", GRAY_COLOR, 0);
             	break;
             	
-            case 0x16: printf("u", 2, 0); break;
-            case 0x17: printf("i", 2, 0); break;
-            case 0x18: printf("o", 2, 0); break;
-            case 0x19: printf("p", 2, 0); break;
+            case 0x16: printf("u", GRAY_COLOR, 0); break;
+            case 0x17: printf("i", GRAY_COLOR, 0); break;
+            case 0x18: printf("o", GRAY_COLOR, 0); break;
+            case 0x19: printf("p", GRAY_COLOR, 0); break;
 
-            case 0x1E: printf("a", 2, 0); break;
-            case 0x1F: printf("s", 2, 0); break;
-            case 0x20: printf("d", 2, 0); break;
-            case 0x21: printf("f", 2, 0); break;
-            case 0x22: printf("g", 2, 0); break;
-            case 0x23: printf("h", 2, 0); break;
-            case 0x24: printf("j", 2, 0); break;
-            case 0x25: printf("k", 2, 0); break;
-            case 0x26: printf("l", 2, 0); break;
+            case 0x1E: printf("a", GRAY_COLOR, 0); break;
+            case 0x1F: printf("s", GRAY_COLOR, 0); break;
+            case 0x20: printf("d", GRAY_COLOR, 0); break;
+            case 0x21: printf("f", GRAY_COLOR, 0); break;
+            case 0x22: printf("g", GRAY_COLOR, 0); break;
+            case 0x23: printf("h", GRAY_COLOR, 0); break;
+            case 0x24: printf("j", GRAY_COLOR, 0); break;
+            case 0x25: printf("k", GRAY_COLOR, 0); break;
+            case 0x26: printf("l", GRAY_COLOR, 0); break;
 
 			case 0x2C: 
 	    		if(DEFAULT_LAYOUT == "de_DE")		
-            		printf("y", 2, 0);
+            		printf("y", GRAY_COLOR, 0);
             	else
-            		printf("z", 2, 0);
+            		printf("z", GRAY_COLOR, 0);
 				break;
             
-            case 0x2D: printf("x", 2, 0); break;
-            case 0x2E: printf("c", 2, 0); break;
-            case 0x2F: printf("v", 2, 0); break;
-            case 0x30: printf("b", 2, 0); break;
-            case 0x31: printf("n", 2, 0); break;
-            case 0x32: printf("m", 2, 0); break;
-            case 0x33: printf(",", 2, 0); break;
-            case 0x34: printf(".", 2, 0); break;
-            case 0x35: printf("-", 2, 0); break;
+            case 0x2D: printf("x", GRAY_COLOR, 0); break;
+            case 0x2E: printf("c", GRAY_COLOR, 0); break;
+            case 0x2F: printf("v", GRAY_COLOR, 0); break;
+            case 0x30: printf("b", GRAY_COLOR, 0); break;
+            case 0x31: printf("n", GRAY_COLOR, 0); break;
+            case 0x32: printf("m", GRAY_COLOR, 0); break;
+            case 0x33: printf(",", GRAY_COLOR, 0); break;
+            case 0x34: printf(".", GRAY_COLOR, 0); break;
+            case 0x35: printf("-", GRAY_COLOR, 0); break;
 
             case 0x1C: 
-            	printf("\n", 2, 0); 
-            	printf(BUFFER, 6, 0);
+            	printf("\n", GRAY_COLOR, 0); 
+            	printf(BUFFER, BROWN_COLOR, 0);
             	break;
-            case 0x39: printf(" ", 2, 0); break;
+            case 0x39: printf(" ", GRAY_COLOR, 0); break;
 
             default: {
                 char* foo = "KEYBOARD 0x00 ";

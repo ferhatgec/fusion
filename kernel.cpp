@@ -20,7 +20,7 @@
 #include "include/gdt/gdt.h"
 #include "include/interrupts.h"
 #include "include/io/keyboard.h"
-
+#include "include/vga/vga.h"
 
 
 typedef void (*constructor)();
@@ -106,7 +106,9 @@ void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
     /* Same with rcolorized */
-    printf(BUFFER, 6, 0);
+    printf(BUFFER, BROWN_COLOR, 0);
+    
+    printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
     
     enable_cursor();
     	

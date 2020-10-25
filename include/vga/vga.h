@@ -15,11 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KERNEL_H
-#define KERNEL_H
+#ifndef VGA_H
+#define VGA_H
 
-#define BUFFER "~fusion"
-#define BUFFER_SIGN " $# "
+// 16-bit Vga color definitions
 
-    
-#endif // KERNEL_H
+#define BLACK_COLOR		0
+#define BLUE_COLOR		1
+#define GREEN_COLOR		2
+#define CYAN_COLOR		3
+#define RED_COLOR		4 
+#define PURPLE_COLOR		5
+#define BROWN_COLOR		6
+#define GRAY_COLOR    		7
+#define DARK_GRAY_COLOR 	8
+
+#define LIGHT_BLUE_COLOR        9
+#define LIGHT_GREN_COLOR        10
+#define LIGHT_CYAN_COLOR        11
+#define LIGHT_RED_COLOR         12
+#define LIGHT_PURPLE_COLOR      13
+#define YELLOW_COLOR            14
+#define WHITE_COLOR             15
+
+#endif // VGA_H
