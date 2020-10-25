@@ -108,8 +108,8 @@ void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
 void show_buffer() {
 	/* Same with rcolorized */
     printf(DEFAULT_USERNAME, BROWN_COLOR, 0);
-    printf(BUFFER, BROWN_COLOR, 0);
-    printf(DEFAULT_HOSTNAME, BROWN_COLOR, 0);
+    printf(BUFFER, YELLOW_COLOR, 0);
+    printf(DEFAULT_HOSTNAME, LIGHT_GREEN_COLOR, 0);
     
     printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
 }

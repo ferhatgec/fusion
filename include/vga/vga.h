@@ -31,7 +31,7 @@
 #define DARK_GRAY_COLOR 	8
 
 #define LIGHT_BLUE_COLOR        9
-#define LIGHT_GREN_COLOR        10
+#define LIGHT_GREEN_COLOR       10
 #define LIGHT_CYAN_COLOR        11
 #define LIGHT_RED_COLOR         12
 #define LIGHT_PURPLE_COLOR      13
