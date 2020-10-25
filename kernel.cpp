@@ -21,17 +21,57 @@
 #include "include/interrupts.h"
 #include "include/io/keyboard.h"
 
-void write_string(int colour, const char *string) {
-    volatile char *video = (volatile char*)0xB8000;
+
+
+typedef void (*constructor)();
+extern "C" constructor start_ctors;
+extern "C" constructor end_ctors;
+extern "C" void callConstructors() {
+    for(constructor* i = &start_ctors; i != &end_ctors; i++)
+        (*i)();
+}
+
+static inline void outb(unsigned short port, unsigned char value) {
+	asm volatile ("outb %1, %0" : : "dN" (port), "a" (value));
+}
+
+static inline unsigned char inb(unsigned short port) {
+	unsigned char ret;
+	asm volatile ( "inb %1, %0" : "=a"(ret) : "Nd"(port) );
+
+	return ret;
+}
     
-    while(*string != 0) {
-        *video++ = *string++;
-        *video++ = colour;
-    }
+
+
+void enable_cursor() {
+    outb(0x3D4, 0x0A);
+    char curstart = inb(0x3D5) & 0x1F; // get cursor scanline start
+
+    outb(0x3D4, 0x0A);
+    outb(0x3D5, curstart | 0x20); // set enable bit
 }
 
 
-void printf(char* str) {
+void update_cursor(int x, int y) {
+	uint16_t pos = y * 80 + x;
+ 
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (uint8_t) (pos & 0xFF));
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+}
+
+
+
+void WriteCharacter(unsigned char c, unsigned char forecolour, unsigned char backcolour, int x, int y) {
+     uint16_t attrib = (backcolour << 4) | (forecolour & 0x0F);
+     volatile uint16_t * where;
+     where = (volatile uint16_t *)0xB8000 + (y * 80 + x) ;
+     *where = c | (attrib << 8);
+}
+
+void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
     static uint16_t* VideoMemory = (uint16_t*)0xb8000;
 
     static uint8_t x=0,y=0;
@@ -43,7 +83,8 @@ void printf(char* str) {
                 y++;
                 break;
             default:
-                VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | str[i];
+            	WriteCharacter(str[i], forecolor, backcolor, x, y);
+                //VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | str[i];
                 x++;
                 break;
         }
@@ -63,23 +104,11 @@ void printf(char* str) {
     }
 }
 
-typedef void (*constructor)();
-extern "C" constructor start_ctors;
-extern "C" constructor end_ctors;
-extern "C" void callConstructors() {
-    for(constructor* i = &start_ctors; i != &end_ctors; i++)
-        (*i)();
-}
-
-void outb(unsigned short port, char data) {
-    asm volatile("out %0,%1"
-                 :
-                 : "a"(data), "d"(port));
-}
-
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
     /* Same with rcolorized */
-    write_string(11, BUFFER);
+    printf(BUFFER, 6, 0);
+    
+    enable_cursor();
     	
     GlobalDescriptorTable gdt;
  

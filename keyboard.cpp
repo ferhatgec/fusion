@@ -38,7 +38,7 @@ commandport(0x64) {
 
 KeyboardDriver::~KeyboardDriver() {}
 
-void printf(char*);
+void printf(char*, unsigned char, unsigned char);
 void write_string(int colour, const char *string);
 
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
@@ -46,67 +46,67 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
     
     if(key < 0x80) {
         switch(key) {
-            case 0x02: printf("1"); break;
-            case 0x03: printf("2"); break;
-            case 0x04: printf("3"); break;
-            case 0x05: printf("4"); break;
-            case 0x06: printf("5"); break;
-            case 0x07: printf("6"); break;
-            case 0x08: printf("7"); break;
-            case 0x09: printf("8"); break;
-            case 0x0A: printf("9"); break;
-            case 0x0B: printf("0"); break;
+            case 0x02: printf("1", 2, 0); break;
+            case 0x03: printf("2", 2, 0); break;
+            case 0x04: printf("3", 2, 0); break;
+            case 0x05: printf("4", 2, 0); break;
+            case 0x06: printf("5", 2, 0); break;
+            case 0x07: printf("6", 2, 0); break;
+            case 0x08: printf("7", 2, 0); break;
+            case 0x09: printf("8", 2, 0); break;
+            case 0x0A: printf("9", 2, 0); break;
+            case 0x0B: printf("0", 2, 0); break;
 
-            case 0x10: printf("q"); break;
-            case 0x11: printf("w"); break;
-            case 0x12: printf("e"); break;
-            case 0x13: printf("r"); break;
-            case 0x14: printf("t"); break;
+            case 0x10: printf("q", 2, 0); break;
+            case 0x11: printf("w", 2, 0); break;
+            case 0x12: printf("e", 2, 0); break;
+            case 0x13: printf("r", 2, 0); break;
+            case 0x14: printf("t", 2, 0); break;
             
 	    	case 0x15: 
 	    		if(DEFAULT_LAYOUT == "de_DE")
-	    			printf("z");
+	    			printf("z", 2, 0);
             	else
-            		printf("y");
+            		printf("y", 2, 0);
             	break;
             	
-            case 0x16: printf("u"); break;
-            case 0x17: printf("i"); break;
-            case 0x18: printf("o"); break;
-            case 0x19: printf("p"); break;
+            case 0x16: printf("u", 2, 0); break;
+            case 0x17: printf("i", 2, 0); break;
+            case 0x18: printf("o", 2, 0); break;
+            case 0x19: printf("p", 2, 0); break;
 
-            case 0x1E: printf("a"); break;
-            case 0x1F: printf("s"); break;
-            case 0x20: printf("d"); break;
-            case 0x21: printf("f"); break;
-            case 0x22: printf("g"); break;
-            case 0x23: printf("h"); break;
-            case 0x24: printf("j"); break;
-            case 0x25: printf("k"); break;
-            case 0x26: printf("l"); break;
+            case 0x1E: printf("a", 2, 0); break;
+            case 0x1F: printf("s", 2, 0); break;
+            case 0x20: printf("d", 2, 0); break;
+            case 0x21: printf("f", 2, 0); break;
+            case 0x22: printf("g", 2, 0); break;
+            case 0x23: printf("h", 2, 0); break;
+            case 0x24: printf("j", 2, 0); break;
+            case 0x25: printf("k", 2, 0); break;
+            case 0x26: printf("l", 2, 0); break;
 
 			case 0x2C: 
 	    		if(DEFAULT_LAYOUT == "de_DE")		
-            		printf("y");
+            		printf("y", 2, 0);
             	else
-            		printf("z");
+            		printf("z", 2, 0);
 				break;
             
-            case 0x2D: printf("x"); break;
-            case 0x2E: printf("c"); break;
-            case 0x2F: printf("v"); break;
-            case 0x30: printf("b"); break;
-            case 0x31: printf("n"); break;
-            case 0x32: printf("m"); break;
-            case 0x33: printf(","); break;
-            case 0x34: printf("."); break;
-            case 0x35: printf("-"); break;
+            case 0x2D: printf("x", 2, 0); break;
+            case 0x2E: printf("c", 2, 0); break;
+            case 0x2F: printf("v", 2, 0); break;
+            case 0x30: printf("b", 2, 0); break;
+            case 0x31: printf("n", 2, 0); break;
+            case 0x32: printf("m", 2, 0); break;
+            case 0x33: printf(",", 2, 0); break;
+            case 0x34: printf(".", 2, 0); break;
+            case 0x35: printf("-", 2, 0); break;
 
             case 0x1C: 
-            	printf("\n"); 
-            	printf(BUFFER);
+            	printf("\n", 2, 0); 
+            	printf(BUFFER, 6, 0);
             	break;
-            case 0x39: printf(" "); break;
+            case 0x39: printf(" ", 2, 0); break;
 
             default: {
                 char* foo = "KEYBOARD 0x00 ";

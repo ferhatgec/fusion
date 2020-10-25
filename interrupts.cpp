@@ -17,7 +17,7 @@
 
 #include "include/interrupts.h"
 
-void printf(char* str);
+void printf(char* str, unsigned char, unsigned char);
 
 InterruptHandler::InterruptHandler(InterruptManager* interruptManager, uint8_t InterruptNumber) {
     this->InterruptNumber = InterruptNumber;
@@ -166,7 +166,7 @@ uint32_t InterruptManager::DoHandleInterrupt(uint8_t interrupt, uint32_t esp) {
         char* hex = "0123456789ABCDEF";
         foo[22] = hex[(interrupt >> 4) & 0xF];
         foo[23] = hex[interrupt & 0xF];
-        printf(foo);
+        printf(foo, 2, 0);
     }
 
     // hardware interrupts must be acknowledged
