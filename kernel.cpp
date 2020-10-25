@@ -105,11 +105,17 @@ void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
     }
 }
 
-extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
-    /* Same with rcolorized */
+void show_buffer() {
+	/* Same with rcolorized */
+    printf(DEFAULT_USERNAME, BROWN_COLOR, 0);
     printf(BUFFER, BROWN_COLOR, 0);
+    printf(DEFAULT_HOSTNAME, BROWN_COLOR, 0);
     
     printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
+}
+
+extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {    
+    show_buffer();
     
     enable_cursor();
     
@@ -120,7 +126,7 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     /* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
     KeyboardDriver keyboard(&interrupts);
-    MouseDriver mouse(&interrupts);	
+    MouseDriver mouse(&interrupts);
     
     interrupts.Activate();
 

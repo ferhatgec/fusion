@@ -41,6 +41,7 @@ KeyboardDriver::~KeyboardDriver() {}
 
 void printf(char*, unsigned char, unsigned char);
 void write_string(int colour, const char *string);
+void show_buffer();
 
 uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
     uint8_t key = dataport.Read();
@@ -106,8 +107,7 @@ uint32_t KeyboardDriver::HandleInterrupt(uint32_t esp) {
 
             case 0x1C: 
             	printf("\n", GRAY_COLOR, 0); 
-            	printf(BUFFER, BROWN_COLOR, 0);
-            	printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
+            	show_buffer();
             	break;
             case 0x39: printf(" ", GRAY_COLOR, 0); break;
 

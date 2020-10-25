@@ -18,8 +18,12 @@
 #ifndef KERNEL_H
 #define KERNEL_H
 
-#define BUFFER "~fusion"
+
+#define DEFAULT_USERNAME "user"
+#define DEFAULT_HOSTNAME "fegeya"    
+    
+// user@hostname $#
+#define BUFFER "@"
 #define BUFFER_SIGN " $# "
 
-    
 #endif // KERNEL_H
