@@ -64,7 +64,7 @@ extern "C" void callConstructors() {
 
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {
-    printf("fusion~ $#");
+    printf("fusion~ $# ");
 
     GlobalDescriptorTable gdt;
     InterruptManager interrupts(0x20, &gdt);
