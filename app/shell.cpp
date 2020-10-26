@@ -22,8 +22,8 @@
 
 #include "../include/io/input.h"
 #include "../include/types.h"
+#include "../include/vga/vga.h"
 #include "../include/interrupts.h"
-#include "../include/port.h"
 #include "../include/port.h"
 
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
@@ -32,11 +32,13 @@ void show_buffer();
 void RunShell() {
 	KeyboardInput input;
 	
-	string data = input.GetInput();
+	while(1) {
+		string data = input.GetInput();
 	
-	if(equal(data, "help") == 1) {
-		printf("\nHmm. Fusion has only 'help' command, srry\n", 4, 0);
-	}
+		if(equal(data, "help") == 1) {
+			printf("\nHmm. Fusion has only 'help' command, srry\n", RED_COLOR, 0);
+		}
 
-	show_buffer();
+		show_buffer();
+	}
 }
