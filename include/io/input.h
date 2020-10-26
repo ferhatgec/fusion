@@ -15,15 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRING_H
-#define STRING_H
+#ifndef INPUT_H
+#define INPUT_H
 
 #include "../types.h"
+#include "../interrupts.h"
+#include "../port.h"
 
-class String {
+class KeyboardInput {
 public:
-	uint16_t length(string ch);
-	uint8_t equal(string ch1, string ch2);
+	string GetInput();
 };
 
-#endif // STRING_H
+#endif // INPUT_H

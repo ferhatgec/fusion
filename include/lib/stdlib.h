@@ -20,8 +20,9 @@
 
 #include "../types.h"
 
-uint8_t is_digit(char ch);
-
-int32_t atoi(const char* str);
-
+class Stdlib {
+public:
+	uint8_t is_digit(char ch);
+	int32_t atoi(const char* str);
+};
 #endif // STDLIB_H

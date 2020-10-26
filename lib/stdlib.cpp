@@ -18,14 +18,14 @@
 #include "../include/lib/stdlib.h"
 #include "../include/types.h"
 
-uint8_t is_digit(char ch) {
+uint8_t Stdlib::is_digit(char ch) {
 	if (ch >= '0' && ch <= '9')
         return 1;
 
     return 0;
 }
 
-int32_t atoi(const char* ch) {
+int32_t Stdlib::atoi(const char* ch) {
 	int32_t val;
 	
 	while(is_digit(*ch)) {
