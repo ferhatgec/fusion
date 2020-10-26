@@ -27,7 +27,7 @@ fusion.iso: fusion.bin
 	mkdir iso/boot
 	mkdir iso/boot/grub
 	cp fusion.bin iso/boot/fusion.bin
-	echo 'set timeout=0'                      > iso/boot/grub/grub.cfg
+	echo 'set timeout=5'                      > iso/boot/grub/grub.cfg
 	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
 	echo ''                                  >> iso/boot/grub/grub.cfg
 	echo 'menuentry "Fegeya Fusion" {' >> iso/boot/grub/grub.cfg
