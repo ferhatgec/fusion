@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "include/interrupts.h"
+#include "../include/interrupts.h"
 
 void printf(char* str, unsigned char, unsigned char);
 

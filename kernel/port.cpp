@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "include/port.h"
+#include "../include/port.h"
 
 
 Port::Port(uint16_t portnumber) {

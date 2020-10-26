@@ -13,7 +13,7 @@ run: fusion.iso
 %.o: lib/%.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
 	
-%.o: %.cpp
+%.o: kernel/%.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
 
 %.o: %.s

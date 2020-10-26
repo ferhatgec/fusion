@@ -15,10 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "include/kernel.h"
-#include "include/io/keyboard.h"
-#include "include/io/layout.h"
-#include "include/vga/vga.h"
+#include "../include/kernel.h"
+#include "../include/io/keyboard.h"
+#include "../include/io/layout.h"
+#include "../include/vga/vga.h"
 
 KeyboardDriver::KeyboardDriver(InterruptManager* manager)
 : InterruptHandler(manager, 0x21),

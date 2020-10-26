@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "include/io/mouse.h"
+#include "../include/io/mouse.h"
 
 MouseDriver::MouseDriver(InterruptManager* manager) : InterruptHandler(manager, 0x2C),
 	dataport(0x60),

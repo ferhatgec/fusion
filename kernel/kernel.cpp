@@ -15,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "include/kernel.h"
-#include "include/types.h"
-#include "include/gdt/gdt.h"
-#include "include/interrupts.h"
-#include "include/io/keyboard.h"
-#include "include/io/mouse.h"
-#include "include/vga/vga.h"
-#include "include/lib/string.h"
-#include "include/lib/stdlib.h"
+#include "../include/kernel.h"
+#include "../include/types.h"
+#include "../include/gdt/gdt.h"
+#include "../include/interrupts.h"
+#include "../include/io/keyboard.h"
+#include "../include/io/mouse.h"
+#include "../include/vga/vga.h"
+#include "../include/lib/string.h"
+#include "../include/lib/stdlib.h"
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
