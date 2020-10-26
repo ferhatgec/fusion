@@ -22,5 +22,6 @@
 
 uint16_t length(string ch);
 uint8_t equal(string ch1, string ch2);
+uint8_t find(string data, string ch);
 
 #endif // STRING_H

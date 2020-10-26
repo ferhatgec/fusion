@@ -40,3 +40,26 @@ uint8_t equal(string ch1, string ch2) {
 	
 	return result;
 }
+
+uint8_t find(string data, string ch) {
+	uint8_t len = 0;
+    
+    do { len++; } while(ch[len] != '\0');
+    
+    if (!len)
+        return 0;
+        
+    for (int i = 0; i < len; i ++) {
+       	if (data[i] == ch[0]) {
+			int j = 0;
+            
+            for (; j < len; j++)
+                if (data[i + j] != ch[j]) break;
+                	 
+            if (j == len)
+				return i;
+        }            
+	}        
+
+    return -1;
+}

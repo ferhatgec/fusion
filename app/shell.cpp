@@ -36,9 +36,9 @@ void RunShell() {
 	while(1) {
 		string data = input.GetInput();
 	
-		if(equal(data, "help") == 1) {
+		if(find(data, "help") == 0) {
 			printf("fufetch : Simple system info application\nhelp: :^)\n", RED_COLOR, 0);
-		} else if(equal(data, "fufetch") == 1) {
+		} else if(find(data, "fufetch") == 0) {
 			RunFuFetch();
 		}
 
