@@ -175,8 +175,6 @@ KeyboardInput::GetInput() {
         	        i++;
         	        break;
         		case 28:
-        	       // printch('\n');
-        	       // buffstr[i] = '\n';
 					i++;
         	        reading = 0;
         	        break;

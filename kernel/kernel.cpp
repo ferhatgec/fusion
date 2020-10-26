@@ -25,6 +25,8 @@
 #include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
 
+#include "../include/app/shell.h"
+
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
 extern "C" constructor end_ctors;
@@ -114,7 +116,7 @@ void show_buffer() {
     
     printf(BUFFER_SIGN, LIGHT_BLUE_COLOR, 0);
 }
-
+    
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {    
     string str = "Hey user, Welcome to Fegeya Fusion!\n";
     
@@ -126,14 +128,14 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     GlobalDescriptorTable gdt;
  
-  
     InterruptManager interrupts(0x20, &gdt);
     
     /* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
     KeyboardDriver keyboard(&interrupts);
     MouseDriver mouse(&interrupts);
     
-    interrupts.Activate();
+    RunShell();
+    //interrupts.Activate();
 
     while(1);
 }

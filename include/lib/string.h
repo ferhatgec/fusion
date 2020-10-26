@@ -20,10 +20,7 @@
 
 #include "../types.h"
 
-class String {
-public:
-	uint16_t length(string ch);
-	uint8_t equal(string ch1, string ch2);
-};
+uint16_t length(string ch);
+uint8_t equal(string ch1, string ch2);
 
 #endif // STRING_H

@@ -15,25 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../include/lib/stdlib.h"
-#include "../include/types.h"
+#ifndef SHELL_H
+#define SHELL_H
 
-uint8_t is_digit(char ch) {
-	if (ch >= '0' && ch <= '9')
-        return 1;
+#include "../types.h"
+#include "../interrupts.h"
+#include "../port.h"
 
-    return 0;
-}
+void RunShell();
 
-int32_t atoi(const char* ch) {
-	int32_t val;
-	
-	while(is_digit(*ch)) {
-		val *= 10;
-		val += (*ch) - '0';
-		ch++;
-	}
-	
-	return val;
-}
-
+#endif // SHELL_H

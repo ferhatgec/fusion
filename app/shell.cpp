@@ -15,25 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "../include/app/shell.h"
+
+#include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
+
+#include "../include/io/input.h"
 #include "../include/types.h"
+#include "../include/interrupts.h"
+#include "../include/port.h"
+#include "../include/port.h"
 
-uint8_t is_digit(char ch) {
-	if (ch >= '0' && ch <= '9')
-        return 1;
+void printf(char* str, unsigned char forecolor, unsigned char backcolor);
+void show_buffer();
 
-    return 0;
-}
-
-int32_t atoi(const char* ch) {
-	int32_t val;
+void RunShell() {
+	KeyboardInput input;
 	
-	while(is_digit(*ch)) {
-		val *= 10;
-		val += (*ch) - '0';
-		ch++;
+	string data = input.GetInput();
+	
+	if(equal(data, "help") == 1) {
+		printf("\nHmm. Fusion has only 'help' command, srry\n", 4, 0);
 	}
-	
-	return val;
-}
 
+	show_buffer();
+}

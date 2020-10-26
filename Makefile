@@ -2,13 +2,16 @@ GCCPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
+app = shell.o
 lib = string.o stdlib.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o kernel.o
-
 
 run: fusion.iso
 	(killall VirtualBox && sleep 1) || true
 	VirtualBox
+	
+%.o: app/%.cpp
+	gcc $(GCCPARAMS) -c -o $@ $<
 	
 %.o: lib/%.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
@@ -19,8 +22,8 @@ run: fusion.iso
 %.o: %.s
 	as $(ASPARAMS) -o $@ $<
 
-fusion.bin: linker.ld $(objects) $(lib)
-	ld $(LDPARAMS) -T $< -o $@ $(objects)
+fusion.bin: linker.ld $(objects) $(lib) $(app)
+	ld $(LDPARAMS) -T $< -o $@ $(objects) $(lib) $(app)
 
 fusion.iso: fusion.bin
 	mkdir iso
@@ -35,7 +38,7 @@ fusion.iso: fusion.bin
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=fusion.iso iso
-	rm -f $(objects) $(lib) fusion.bin
+	rm -f $(objects) $(lib) $(app) fusion.bin
 	rm -rf iso
 
 install: fusion.bin
@@ -43,4 +46,4 @@ install: fusion.bin
 
 .PHONY: clean
 clean:
-	rm -f $(objects) fusion.bin fusion.iso
+	rm -f $(objects) $(lib) $(app) fusion.bin fusion.iso
