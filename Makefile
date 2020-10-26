@@ -2,7 +2,7 @@ GCCPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-lib = string.o
+lib = string.o stdlib.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o keyboard.o kernel.o
 
 

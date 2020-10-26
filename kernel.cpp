@@ -23,6 +23,7 @@
 #include "include/io/mouse.h"
 #include "include/vga/vga.h"
 #include "include/lib/string.h"
+#include "include/lib/stdlib.h"
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
