@@ -27,4 +27,6 @@ typedef unsigned int           uint32_t;
 typedef long long int           int64_t;
 typedef unsigned long long int uint64_t;
     
+typedef char* string;     
+
 #endif // TYPES_H
