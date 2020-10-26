@@ -35,6 +35,7 @@ fusion.iso: fusion.bin
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=fusion.iso iso
+	rm -f $(objects) $(lib) fusion.bin
 	rm -rf iso
 
 install: fusion.bin
