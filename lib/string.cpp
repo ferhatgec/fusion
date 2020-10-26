@@ -23,3 +23,20 @@ uint16_t length(string ch) {
 	
 	return len;
 }
+
+uint8_t equal(string ch1, string ch2) {
+	uint8_t result, size;
+	
+	result = 1;
+	size = length(ch1);
+	
+	if(size != length(ch2)) 
+		result = 0;
+	else {
+		for(uint8_t i = 0; i <= size; i++)
+			if(ch1[i] != ch2[i]) 
+				result = 0;
+	}
+	
+	return result;
+}
