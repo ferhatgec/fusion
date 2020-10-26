@@ -22,7 +22,7 @@
 #include "include/io/keyboard.h"
 #include "include/io/mouse.h"
 #include "include/vga/vga.h"
-
+#include "include/lib/string.h"
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
@@ -115,6 +115,10 @@ void show_buffer() {
 }
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {    
+    string str = "Hey user, Welcome to Fegeya Fusion!\n";
+    
+    printf(str, 10, 2);
+    
     show_buffer();
     
     enable_cursor();

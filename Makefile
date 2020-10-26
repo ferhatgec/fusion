@@ -2,6 +2,7 @@ GCCPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
+lib = string.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o keyboard.o kernel.o
 
 
@@ -9,13 +10,16 @@ run: fusion.iso
 	(killall VirtualBox && sleep 1) || true
 	VirtualBox
 	
+%.o: lib/%.cpp
+	gcc $(GCCPARAMS) -c -o $@ $<
+	
 %.o: %.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
 
 %.o: %.s
 	as $(ASPARAMS) -o $@ $<
 
-fusion.bin: linker.ld $(objects)
+fusion.bin: linker.ld $(objects) $(lib)
 	ld $(LDPARAMS) -T $< -o $@ $(objects)
 
 fusion.iso: fusion.bin
