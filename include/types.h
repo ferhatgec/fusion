@@ -29,4 +29,7 @@ typedef unsigned long long int uint64_t;
     
 typedef char* string;     
 
+#define true 1
+#define false 0
+
 #endif // TYPES_H
