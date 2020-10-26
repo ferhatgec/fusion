@@ -36,7 +36,7 @@ void RunShell() {
 		string data = input.GetInput();
 	
 		if(equal(data, "help") == 1) {
-			printf("\nHmm. Fusion has only 'help' command, srry\n", RED_COLOR, 0);
+			printf("Hmm. Fusion has only 'help' command, srry\n", RED_COLOR, 0);
 		}
 
 		show_buffer();

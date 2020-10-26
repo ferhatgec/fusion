@@ -175,6 +175,7 @@ KeyboardInput::GetInput() {
         	        i++;
         	        break;
         		case 28:
+        			printf("\n", GRAY_COLOR, 0);
 					i++;
         	        reading = 0;
         	        break;

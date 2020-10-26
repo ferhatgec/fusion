@@ -120,7 +120,7 @@ void show_buffer() {
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {    
     string str = "Hey user, Welcome to Fegeya Fusion!\n";
     
-    printf(str, 10, 2);
+    printf(str, 10, 0);
     
     show_buffer();
     
