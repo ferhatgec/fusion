@@ -15,33 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../include/app/shell.h"
-#include "../include/app/fufetch.h"
+#ifndef FUFETCH_H
+#define FUFETCH_H
 
-#include "../include/lib/string.h"
-#include "../include/lib/stdlib.h"
+#include "../types.h"
+#include "../interrupts.h"
+#include "../port.h"
 
-#include "../include/io/input.h"
-#include "../include/types.h"
-#include "../include/vga/vga.h"
-#include "../include/interrupts.h"
-#include "../include/port.h"
+void RunFuFetch();
 
-void printf(char* str, unsigned char forecolor, unsigned char backcolor);
-void show_buffer();
-
-void RunShell() {
-	KeyboardInput input;
-	
-	while(1) {
-		string data = input.GetInput();
-	
-		if(equal(data, "help") == 1) {
-			printf("Hmm. Fusion has only 'help' command, srry\n", RED_COLOR, 0);
-		} else if(equal(data, "fufetch") == 1) {
-			RunFuFetch();
-		}
-
-		show_buffer();
-	}
-}
+#endif // FUFETCH_H

@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "../include/app/shell.h"
 #include "../include/app/fufetch.h"
 
 #include "../include/lib/string.h"
@@ -26,22 +25,28 @@
 #include "../include/vga/vga.h"
 #include "../include/interrupts.h"
 #include "../include/port.h"
+#include "../include/kernel.h"
 
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
-void RunShell() {
-	KeyboardInput input;
-	
-	while(1) {
-		string data = input.GetInput();
-	
-		if(equal(data, "help") == 1) {
-			printf("Hmm. Fusion has only 'help' command, srry\n", RED_COLOR, 0);
-		} else if(equal(data, "fufetch") == 1) {
-			RunFuFetch();
-		}
+string Fusion_logo = "       _______\n"
+		     "      / _____/\n"
+		     "     / /_____\n"
+                     "__  /  _____/\n"
+                     "\\ \\/  /\n"
+                     " \\/__/\n";
 
-		show_buffer();
-	}
+
+void RunFuFetch() {
+	printf("       _______\n      / _____/\n     / /_____  ", GREEN_COLOR, 0);
+	printf("Username: ", CYAN_COLOR, 0);
+	printf(DEFAULT_USERNAME, LIGHT_BLUE_COLOR, 0);
+	printf("\n__  /  _____/  ", GREEN_COLOR, 0);
+	printf("Hostname: ", CYAN_COLOR, 0);
+	printf(DEFAULT_HOSTNAME, LIGHT_BLUE_COLOR, 0);
+	printf("\n\\ \\/  /  ", GREEN_COLOR, 0);
+	printf("      Fusion version: ", CYAN_COLOR, 0);
+	printf(FUSION_VERSION, LIGHT_BLUE_COLOR, 0);
+	printf("\n \\/__/\n", GREEN_COLOR, 0);
 }
