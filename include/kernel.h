@@ -26,4 +26,7 @@
 #define BUFFER "@"
 #define BUFFER_SIGN " $# "
 
+#define FUSION_VERSION "0.1-develop"
+#define KERNEL_VERSION "fusion_0.1-develop"
+
 #endif // KERNEL_H
