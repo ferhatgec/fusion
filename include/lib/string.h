@@ -25,5 +25,6 @@ uint8_t equal(string ch1, string ch2);
 uint8_t find(string data, string ch);
 
 extern int8_t compare(string str1, string str2);
+extern char *copy(char *s1, const char *s2);
 
 #endif // STRING_H

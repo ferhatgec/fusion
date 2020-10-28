@@ -27,6 +27,7 @@
 #include "../include/interrupts.h"
 #include "../include/port.h"
 
+char *copy(char *s1, const char *s2);
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
@@ -37,9 +38,24 @@ void RunShell() {
 		string data = input.GetInput();
 	
 		if(compare(data, "help") == 0) {
-			printf("fufetch : Simple system info application\nhelp: :^)\n", RED_COLOR, 0);
+			printf("fufetch : Simple system info application\nhelp: :^)\ntest : string test\n", RED_COLOR, 0);
 		} else if(compare(data, "fufetch") == 0) {
 			RunFuFetch();
+		} else if(compare(data, "test") == 0) {
+			char* data_;
+			
+			printf("This is inputted text: ", WHITE_COLOR, 0);
+			printf(data, WHITE_COLOR, 0);
+			
+			printf("\nCopying.\n", WHITE_COLOR, 0);
+			
+			copy(data_, data);
+			
+			printf("This is copied string (data_) : ", WHITE_COLOR, 0);
+			
+			printf(data_, WHITE_COLOR, 0);
+
+			printf("\n", 0, 0);  
 		}
 
 		show_buffer();
