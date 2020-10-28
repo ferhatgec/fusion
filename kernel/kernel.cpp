@@ -127,18 +127,20 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     printf(str, 10, 0);
     
-    show_buffer();
+    int8_t _exit = 0;
     
-    enable_cursor();
+    do {
+    	show_buffer();
     
-    GlobalDescriptorTable gdt;
+    	enable_cursor();
+    
+    	GlobalDescriptorTable gdt;
  
-    InterruptManager interrupts(0x20, &gdt);
+    	InterruptManager interrupts(0x20, &gdt);
     
-    /* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
-    KeyboardDriver keyboard(&interrupts);
+    	/* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
+    	KeyboardDriver keyboard(&interrupts);
     
-    RunShell();
-    
-    while(1);
+    	_exit = RunShell();
+    } while(_exit != -1);
 }

@@ -38,7 +38,7 @@ void HelpFunction() {
 	printf("test : string test\n", RED_COLOR, 0);
 }
 
-void RunShell() {
+int8_t RunShell() {
 	KeyboardInput input;
 	
 	while(1) {
@@ -66,7 +66,12 @@ void RunShell() {
 			printf(itoa(length(data_)), WHITE_COLOR, 0);
 			
 			printf("\n", 0, 0);  
+		} else if(compare(data, "") != 0) {
+			printf("Fusion: Command not available -> ", RED_COLOR, 0);
+			printf(data, WHITE_COLOR, 0);
+			printf("\n", 0, 0);	
 		}
+			
 
 		show_buffer();
 	}

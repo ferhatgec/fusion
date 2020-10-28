@@ -22,6 +22,6 @@
 #include "../interrupts.h"
 #include "../port.h"
 
-void RunShell();
+int8_t RunShell();
 
 #endif // SHELL_H
