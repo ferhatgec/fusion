@@ -63,3 +63,17 @@ uint8_t find(string data, string ch) {
 
     return -1;
 }
+
+int8_t compare(string str1, string str2) {
+	int16_t res = 0;
+	
+	while (!(res = *(unsigned char*)str1 - *(unsigned char*)str2) && *str2)
+		++str1, ++str2;
+
+	if (res < 0)
+		res = -1;
+	if (res > 0)
+		res = 1;
+
+	return res;
+}
