@@ -7,8 +7,7 @@ lib = string.o stdlib.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o kernel.o
 
 run: fusion.iso
-	(killall VirtualBox && sleep 1) || true
-	VirtualBox
+	gnome-boxes
 	
 %.o: app/%.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
@@ -37,7 +36,7 @@ fusion.iso: fusion.bin
 	echo '  multiboot /boot/fusion.bin'    >> iso/boot/grub/grub.cfg
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
-	grub-mkrescue --output=fusion.iso iso
+	grub2-mkrescue --output=fusion.iso iso
 	rm -f $(objects) $(lib) $(app) fusion.bin
 	rm -rf iso
 
