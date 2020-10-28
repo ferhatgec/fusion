@@ -37,3 +37,27 @@ int32_t atoi(const char* ch) {
 	return val;
 }
 
+char* itoa(int32_t res) {
+	int32_t size = 0;
+	int32_t t = res;
+	
+	while(t / 10 != 0) {
+		t = t / 10;
+		size++;		
+	}
+	
+	static char ret[64];
+	size++;
+	
+	ret[size] = '\0';
+	t = res; 
+	
+	int32_t i = size - 1;
+	while(i >= 0) {
+		ret[i] = (t % 10) + '0';
+		t = t / 10;
+		i--;
+	}
+	
+	return ret;
+}

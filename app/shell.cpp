@@ -27,7 +27,8 @@
 #include "../include/interrupts.h"
 #include "../include/port.h"
 
-char *copy(char *s1, const char *s2);
+
+
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
@@ -54,7 +55,10 @@ void RunShell() {
 			printf("This is copied string (data_) : ", WHITE_COLOR, 0);
 			
 			printf(data_, WHITE_COLOR, 0);
-
+			
+			printf("\nThis is length of string (data_) : ", WHITE_COLOR, 0);
+			printf(itoa(length(data_)), WHITE_COLOR, 0);
+			
 			printf("\n", 0, 0);  
 		}
 

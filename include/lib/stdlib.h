@@ -20,7 +20,8 @@
 
 #include "../types.h"
 
-static uint8_t is_digit(char ch);
-static int32_t atoi(const char* str);
+extern uint8_t is_digit(char ch);
+extern int32_t atoi(const char* str);
+extern char* itoa(int32_t res);
 
 #endif // STDLIB_H

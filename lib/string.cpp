@@ -15,11 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "../include/lib/size_t.h"
 #include "../include/lib/string.h"
 #include "../include/types.h"
 
 uint16_t length(string ch) {
-	for(uint16_t len = 0; ch[len] != '\0'; len++)
+	size_t	len = 0;
+	
+	while (ch[len++]);
 	
 	return len;
 }
