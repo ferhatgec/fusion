@@ -22,10 +22,15 @@
 #include "../include/io/keyboard.h"
 #include "../include/io/mouse.h"
 #include "../include/vga/vga.h"
+
+#include "../include/lib/size_t.h"
 #include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
 
 #include "../include/app/shell.h"
+
+static const size_t FUSION_VGA_WIDTH = 80;
+static const size_t FUSION_VGA_HEIGHT = 25;
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
@@ -58,7 +63,7 @@ void enable_cursor() {
 
 
 void update_cursor(int x, int y) {
-	uint16_t pos = y * 80 + x;
+	uint16_t pos = y * FUSION_VGA_WIDTH + x;
  
 	outb(0x3D4, 0x0F);
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
@@ -71,7 +76,7 @@ void update_cursor(int x, int y) {
 void WriteCharacter(unsigned char c, unsigned char forecolour, unsigned char backcolour, int x, int y) {
      uint16_t attrib = (backcolour << 4) | (forecolour & 0x0F);
      volatile uint16_t * where;
-     where = (volatile uint16_t *)0xB8000 + (y * 80 + x) ;
+     where = (volatile uint16_t *)0xB8000 + (y * FUSION_VGA_WIDTH + x) ;
      *where = c | (attrib << 8);
 }
 
@@ -93,15 +98,15 @@ void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
                 break;
         }
 
-        if(x >= 80) {
+        if(x >= FUSION_VGA_WIDTH) {
             x = 0;
             y++;
         }
 
-        if(y >= 25) {
-            for(y = 0; y < 25; y++)
-                for(x = 0; x < 80; x++)
-                    VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | ' ';
+        if(y >= FUSION_VGA_HEIGHT) {
+            for(y = 0; y < FUSION_VGA_HEIGHT; y++)
+                for(x = 0; x < FUSION_VGA_WIDTH; x++)
+                    VideoMemory[FUSION_VGA_WIDTH * y + x] = (VideoMemory[FUSION_VGA_WIDTH * y + x] & 0xFF00) | ' ';
             x = 0;
             y = 0;
         }
