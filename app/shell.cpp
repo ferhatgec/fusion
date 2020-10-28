@@ -32,6 +32,12 @@
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
+void HelpFunction() {
+	printf("fufetch : Simple system info application\n", RED_COLOR, 0);
+	printf("help: :^)\n", RED_COLOR, 0);
+	printf("test : string test\n", RED_COLOR, 0);
+}
+
 void RunShell() {
 	KeyboardInput input;
 	
@@ -39,7 +45,7 @@ void RunShell() {
 		string data = input.GetInput();
 	
 		if(compare(data, "help") == 0) {
-			printf("fufetch : Simple system info application\nhelp: :^)\ntest : string test\n", RED_COLOR, 0);
+			HelpFunction();	
 		} else if(compare(data, "fufetch") == 0) {
 			RunFuFetch();
 		} else if(compare(data, "test") == 0) {
