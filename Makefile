@@ -2,7 +2,7 @@ GCCPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-app = shell.o fufetch.o
+app = shell.o fufetch.o login.o
 lib = string.o stdlib.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o kernel.o
 

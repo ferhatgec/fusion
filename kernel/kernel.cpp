@@ -28,6 +28,7 @@
 #include "../include/lib/stdlib.h"
 
 #include "../include/app/shell.h"
+#include "../include/app/login.h"
 
 static const size_t FUSION_VGA_WIDTH = 80;
 static const size_t FUSION_VGA_HEIGHT = 25;
@@ -127,13 +128,11 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     printf(str, 10, 0);
     
-    int8_t _exit = 0;
+    int8_t _exit = RunLogin();
     
     do {
-    	show_buffer();
-    
-    	enable_cursor();
-    
+	show_buffer();
+    	
     	GlobalDescriptorTable gdt;
  
     	InterruptManager interrupts(0x20, &gdt);

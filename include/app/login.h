@@ -15,20 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef KERNEL_H
-#define KERNEL_H
+#ifndef LOGIN_H
+#define LOGIN_H
 
+#include "../types.h"
+#include "../interrupts.h"
+#include "../port.h"
+int8_t RunLogin();
 
-#define DEFAULT_USERNAME "user"
-#define DEFAULT_HOSTNAME "fegeya"    
-    
-#define DEFAULT_PASS "fegeya-is-best"
-    
-// user@hostname $#
-#define BUFFER "@"
-#define BUFFER_SIGN " $# "
-
-#define FUSION_VERSION "0.1-develop"
-#define KERNEL_VERSION "fusion_0.1-develop"
-
-#endif // KERNEL_H
+#endif // LOGIN_H
