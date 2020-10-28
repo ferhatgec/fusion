@@ -7,7 +7,7 @@ lib = string.o stdlib.o
 objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o kernel.o
 
 run: fusion.iso
-	gnome-boxes
+	qemu-system-i386 -m 512M -cdrom fusion.iso
 	
 %.o: app/%.cpp
 	gcc $(GCCPARAMS) -c -o $@ $<
