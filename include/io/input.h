@@ -25,6 +25,7 @@
 class KeyboardInput {
 public:
 	string GetInput();
+	string GetPassInput();
 };
 
 #endif // INPUT_H

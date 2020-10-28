@@ -313,3 +313,290 @@ KeyboardInput::GetInput() {
  
     return buffstr;
 }
+
+string
+KeyboardInput::GetPassInput() {
+    char buff;
+    string buffstr;
+    
+    uint8_t i = 0;
+    uint8_t reading = 1;
+    
+    while(reading) {
+        if(inb(0x64) & 0x1) {
+            switch(inb(0x60)) { 
+            	/* TODO:
+            		Add print char function with 
+            			color options. 
+        		*/
+        		
+        		case 2:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '1';
+                	i++;
+                	break;
+        		case 3:
+					printf("2", GRAY_COLOR, 0);
+            	    buffstr[i] = '2';
+            	    i++;
+            	    break;
+        		case 4:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '3';
+                	i++;
+                	break;
+        		case 5:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '4';
+                	i++;
+                	break;
+        		case 6:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '5';
+                	i++;
+                	break;
+        		case 7:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '6';
+                	i++;
+                	break;
+        		case 8:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '7';
+                	i++;
+                	break;
+        		case 9:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '8';
+                	i++;
+                	break;
+        		case 10:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '9';
+                	i++;
+                	break;
+        		case 11:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '0';
+                	i++;
+                	break;
+        		case 12:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '-';
+                	i++;
+                	break;
+        		case 13:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '=';
+                	i++;
+                	break;
+        		case 14:	
+                	printf("\b", GRAY_COLOR, 0);
+                	i--;
+                	
+                	if(i < 0) {
+                		i = 0;
+                	}
+                
+                	buffstr[i+1] = 0;
+                	buffstr[i] = 0;
+                	break;
+        		case 16:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'q';
+                	i++;
+                	break;
+        		case 17:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'w';
+                	i++;
+                	break;
+        		case 18:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'e';
+                	i++;
+                	break;
+        		case 19:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'r';
+                	i++;
+                	break;
+        		case 20:
+        			printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 't';
+                	i++;
+                	break;
+	        	case 21:
+    	            printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = 'y';
+    	            i++;
+    	            break;
+    		    case 22:
+    	            printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = 'u';
+    	            i++;
+    	            break;
+    		    case 23:
+    		    	printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = 'i';
+    	            i++;
+    	            break;
+    		    case 24:
+    	            printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = 'o';
+    	            i++;
+    	            break;
+    		    case 25:
+					printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = 'p';
+    	            i++;
+    	            break;
+    		    case 26:
+					printf("*", GRAY_COLOR, 0);
+    	            buffstr[i] = '[';
+    	            i++;
+    	            break;
+    		    case 27:
+					printf("*", GRAY_COLOR, 0);
+        	        buffstr[i] = ']';
+        	        i++;
+        	        break;
+        		case 28:
+        			printf("\n", GRAY_COLOR, 0);
+					i++;
+        	        reading = 0;
+        	        break;
+        		case 30:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'a';
+                	i++;
+                	break;
+        		case 31:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 's';
+                	i++;
+                	break;
+        		case 32:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'd';
+                	i++;
+                	break;
+        		case 33:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'f';
+                	i++;
+                	break;
+        		case 34:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'g';
+                	i++;
+                	break;
+        		case 35:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'h';
+                	i++;
+                	break;
+        		case 36:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'j';
+                	i++;
+                	break;
+        		case 37:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'k';
+                	i++;
+                	break;
+        		case 38:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'l';
+                	i++;
+                	break;
+        		case 39:
+					printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = ';';
+                	i++;
+                	break;
+        		case 40:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = (char)44;
+                	i++;
+                	break;
+        		case 41:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = (char)44;
+                	i++;
+                	break;
+        		case 44:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'z';
+                	i++;
+                	break;
+        		case 45:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'x';
+                	i++;
+                	break;
+        		case 46:
+            	    printf("*", GRAY_COLOR, 0);
+            	    buffstr[i] = 'c';
+            	    i++;
+            	    break;
+        		case 47:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'v';
+                	i++;
+                	break;                
+        		case 48:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'b';
+                	i++;
+                	break;               
+        		case 49:	
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'n';
+                	i++;
+                	break;                
+        		case 50:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = 'm';
+                	i++;
+                	break;               
+        		case 51:
+					printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = ',';
+                	i++;
+                	break;                
+        		case 52:
+					printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '.';
+                	i++;
+                	break;            
+        		case 53:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '/';
+                	i++;
+                	break;            
+        		case 54:
+					printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '.';
+                	i++;
+                	break;            
+        		case 55:
+                	printf("*", GRAY_COLOR, 0);
+                	buffstr[i] = '/';
+                	i++;
+                	break;                       
+        		case 57:
+            	    printf("*", GRAY_COLOR, 0);
+            	    buffstr[i] = ' ';
+            	    i++;
+            	    break;
+            }
+        }	
+    }
+
+	/* i++ from enter key signal */
+    buffstr[i - 1] = 0;                
+ 
+    return buffstr;
+}

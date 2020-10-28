@@ -44,7 +44,7 @@ int8_t RunLogin() {
 	do {
 		printf("\nPassword: ", 5, 0);
 	
-		_pass = pass.GetInput();
+		_pass = pass.GetPassInput();
 		
 	} while(compare(_pass, DEFAULT_PASS) != 0);
 
