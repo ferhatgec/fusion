@@ -17,6 +17,7 @@
 
 #include "../include/app/shell.h"
 #include "../include/app/fufetch.h"
+#include "../include/app/login.h"
 #include "../include/app/calc.h"
 
 #include "../include/lib/string.h"
@@ -36,6 +37,7 @@ void show_buffer();
 void HelpFunction() {
     printf("fufetch : Simple system info application\n", RED_COLOR, 0);
     printf("calc : Calculator\n", RED_COLOR, 0);
+    printf("logout : logout from user\n", RED_COLOR, 0);
 	printf("help: :^)\n", RED_COLOR, 0);
 	printf("test : string test\n", RED_COLOR, 0);
 }
@@ -43,7 +45,9 @@ void HelpFunction() {
 int8_t RunShell() {
 	KeyboardInput input;
 	
-	while(1) {
+    int8_t logout = 0;
+
+	do {
 		string data = input.GetInput();
 	
 		if(compare(data, "help") == 0) {
@@ -70,13 +74,16 @@ int8_t RunShell() {
 			printf("\n", 0, 0);  
 		} else if(compare(data, "calc") == 0) {
 	        RunCalculator();
-		} else if(compare(data, "") != 0) {
+		} else if(compare(data, "logout") == 0) {
+	        logout = 1;		
+        } else if(compare(data, "") != 0) {
 			printf("Fusion: Command not available -> ", RED_COLOR, 0);
 			printf(data, WHITE_COLOR, 0);
 			printf("\n", 0, 0);	
 		}
 			
+		if(logout == 0) show_buffer();
+	} while(logout == 0);
 
-		show_buffer();
-	}
+    if(RunLogin() == 1) logout = 0;
 }
