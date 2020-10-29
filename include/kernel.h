@@ -24,6 +24,8 @@
     
 #define DEFAULT_PASS "fegeya-is-best"
     
+#define AUTO_LOGIN 1
+
 // user@hostname $#
 #define BUFFER "@"
 #define BUFFER_SIGN " $# "

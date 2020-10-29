@@ -128,10 +128,17 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     
     printf(str, 10, 0);
     
-    int8_t _exit = RunLogin();
+    int8_t _exit;
+
+    if(AUTO_LOGIN == 1)
+        _exit = AUTO_LOGIN;
+    else
+        _exit = RunLogin();
     
+    enable_cursor();
+
     do {
-	show_buffer();
+	    show_buffer();
     	
     	GlobalDescriptorTable gdt;
  
