@@ -17,6 +17,7 @@
 
 #include "../include/app/shell.h"
 #include "../include/app/fufetch.h"
+#include "../include/app/calc.h"
 
 #include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
@@ -66,6 +67,8 @@ int8_t RunShell() {
 			printf(itoa(length(data_)), WHITE_COLOR, 0);
 			
 			printf("\n", 0, 0);  
+		} else if(compare(data, "calc") == 0) {
+	        RunCalculator();
 		} else if(compare(data, "") != 0) {
 			printf("Fusion: Command not available -> ", RED_COLOR, 0);
 			printf(data, WHITE_COLOR, 0);
