@@ -23,7 +23,7 @@
 // FIXME: Must be virtual (currently isnt because the kernel has no memory management yet)
 
 class Port {
-protected:
+public:
 	Port(uint16_t portnumber);
 	~Port();
 	uint16_t portnumber;
@@ -37,7 +37,7 @@ public:
 
 	virtual uint8_t Read();
 	virtual void Write(uint8_t data);
-protected:
+
 	static inline uint8_t Read8(uint16_t _port) {
 		uint8_t result;
 		__asm__ volatile("inb %1, %0" : "=a" (result) : "Nd" (_port));
@@ -56,7 +56,7 @@ public:
 	~Port8BitSlow();
 
 	virtual void Write(uint8_t data);
-protected:
+
 	static inline void Write8Slow(uint16_t _port, uint8_t _data) {
 		__asm__ volatile("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a" (_data), "Nd" (_port));
 	}
@@ -70,7 +70,7 @@ public:
 
 	virtual uint16_t Read();
 	virtual void Write(uint16_t data);
-protected:
+
 	static inline uint16_t Read16(uint16_t _port) {
 		uint16_t result;
 		__asm__ volatile("inw %1, %0" : "=a" (result) : "Nd" (_port));
@@ -89,7 +89,7 @@ public:
 
 	virtual uint32_t Read();
 	virtual void Write(uint32_t data);
-protected:
+
 	static inline uint32_t Read32(uint16_t _port) {
 		uint32_t result;
 		__asm__ volatile("inl %1, %0" : "=a" (result) : "Nd" (_port));

@@ -30,17 +30,30 @@
 #include "../include/port.h"
 
 
-
+void InitPrint(string message, bool ok);
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
 void HelpFunction() {
     printf("fufetch : Simple system info application\n", RED_COLOR, 0);
     printf("calc : Calculator\n", RED_COLOR, 0);
-    printf("logout : logout from user\n", RED_COLOR, 0);
+    printf("logout : Logout from user\n", RED_COLOR, 0);
+    printf("reboot : Reboot the system\n", RED_COLOR, 0);
+    printf("test : String test\n", RED_COLOR, 0);
 	printf("help: :^)\n", RED_COLOR, 0);
-	printf("test : string test\n", RED_COLOR, 0);
 }
+
+void reboot() {
+    uint8_t good = 0x02;
+    while (good & 0x02)
+        good = Port8Bit::Read8(0x64);
+    Port8Bit::Write8(0x64, 0xFE);
+    printf("If you see this message, power off this PC.", WHITE_COLOR, 0);
+loop:
+    InitPrint("Halt the CPU", true);
+    asm volatile ("hlt"); /* Halt the CPU */
+    goto loop; /* Halt again */
+}    
 
 int8_t RunShell() {
 	KeyboardInput input;
@@ -76,6 +89,8 @@ int8_t RunShell() {
 	        RunCalculator();
 		} else if(compare(data, "logout") == 0) {
 	        logout = 1;		
+        } else if(compare(data, "reboot") == 0) {
+            reboot();
         } else if(compare(data, "") != 0) {
 			printf("Fusion: Command not available -> ", RED_COLOR, 0);
 			printf(data, WHITE_COLOR, 0);
