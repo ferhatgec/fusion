@@ -114,6 +114,18 @@ void printf(char* str, unsigned char forecolor, unsigned char backcolor) {
     }
 }
 
+void InitPrint(string message, bool ok) {
+    printf("[", WHITE_COLOR, 0);
+
+    if(ok == true) printf(" OK ", LIGHT_GREEN_COLOR, 0);
+    else printf(" ERROR ", RED_COLOR, 0);
+    
+    printf("] : ", WHITE_COLOR, 0);
+    
+    printf(message, WHITE_COLOR, 0);
+    printf("\n", WHITE_COLOR, 0);
+}
+
 void show_buffer() {
 	/* Same with rcolorized */
     printf(DEFAULT_USERNAME, BROWN_COLOR, 0);
@@ -124,10 +136,8 @@ void show_buffer() {
 }
     
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot_magic*/) {    
-    string str = "Hey user, Welcome to Fegeya Fusion!\n";
-    
-    printf(str, 10, 0);
-    
+    GlobalDescriptorTable gdt;
+ 
     int8_t _exit;
 
     if(AUTO_LOGIN == 1)
@@ -135,17 +145,25 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     else
         _exit = RunLogin();
     
+    
+    InitPrint("Checking auto-login", true); 
+
     enable_cursor();
+    
+    InterruptManager interrupts(0x20, &gdt);
+    
+    InitPrint("Initializing keyboard driver", true);
+    /* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
+    KeyboardDriver keyboard(&interrupts); 
+    
+    InitPrint("Display buffer", true);
+    
+    string str = "Hey user, Welcome to Fegeya Fusion!\n";
+    
+    printf(str, 10, 0);
 
     do {
 	    show_buffer();
-    	
-    	GlobalDescriptorTable gdt;
- 
-    	InterruptManager interrupts(0x20, &gdt);
-    
-    	/* Keyboard & mouse handle interrupts & drivers (Generic PS/2) */
-    	KeyboardDriver keyboard(&interrupts);
     
     	_exit = RunShell();
     } while(_exit != -1);
