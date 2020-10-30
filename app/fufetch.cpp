@@ -26,25 +26,34 @@
 #include "../include/interrupts.h"
 #include "../include/port.h"
 #include "../include/kernel.h"
+#include "../include/time.h"
 
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 void show_buffer();
 
-string Fusion_logo = "       _______\n"
-		     "      / _____/\n"
-		     "     / /_____\n"
-                     "__  /  _____/\n"
-                     "\\ \\/  /\n"
-                     " \\/__/\n";
-
+void ColorizedDate() {
+    printf(itoa(time_get(TIME_DAY)), LIGHT_CYAN_COLOR, 0);
+    printf("/", BROWN_COLOR, 0);
+    printf(itoa(time_get(TIME_MONTH)), LIGHT_CYAN_COLOR, 0);
+    printf("/", BROWN_COLOR, 0);
+    printf(itoa(time_get(TIME_YEAR)), LIGHT_CYAN_COLOR, 0);
+}
 
 void RunFuFetch() {
-	printf("       _______\n      / _____/\n     / /_____  ", GREEN_COLOR, 0);
-	printf("Username: ", CYAN_COLOR, 0);
-	printf(DEFAULT_USERNAME, LIGHT_BLUE_COLOR, 0);
-	printf("\n__  /  _____/  ", GREEN_COLOR, 0);
-	printf("Hostname: ", CYAN_COLOR, 0);
-	printf(DEFAULT_HOSTNAME, LIGHT_BLUE_COLOR, 0);
+	printf("       _______ ", GREEN_COLOR, 0);
+    printf(DEFAULT_USERNAME, CYAN_COLOR, 0);
+    printf(BUFFER, LIGHT_BLUE_COLOR, 0);
+	printf(DEFAULT_HOSTNAME, CYAN_COLOR, 0);
+    printf("\n", WHITE_COLOR, 0);
+
+    printf("      / _____/ ------------\n", GREEN_COLOR, 0);
+    printf("     / /_____  ", GREEN_COLOR, 0);
+	printf("Date: ", CYAN_COLOR, 0);
+    ColorizedDate();
+	
+    printf("\n__  /  _____/  ", GREEN_COLOR, 0);
+	printf("CPUID: ", CYAN_COLOR, 0);
+	printf("Generic", LIGHT_BLUE_COLOR, 0);
 	printf("\n\\ \\/  /  ", GREEN_COLOR, 0);
 	printf("      Fusion version: ", CYAN_COLOR, 0);
 	printf(FUSION_VERSION, LIGHT_BLUE_COLOR, 0);
