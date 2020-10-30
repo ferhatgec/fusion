@@ -49,6 +49,6 @@ uint32_t time_get(uint32_t selector);
 
 void time_task();
 
-extern void PrintYear();
+extern void PrintDate();
 
 #endif // TIME_H

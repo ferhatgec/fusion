@@ -56,7 +56,9 @@ uint32_t time_get(uint32_t selector) {
     return from_bcd(get_realtime_reg(selector));
 }
 
-void PrintYear() {
+void PrintDate() {
+    printf(itoa(time_get(TIME_DAY)), WHITE_COLOR, 0);
+    printf("/", WHITE_COLOR, 0);
     printf(itoa(time_get(TIME_MONTH)), WHITE_COLOR, 0);
     printf("/", WHITE_COLOR, 0);
     printf(itoa(time_get(TIME_YEAR)), WHITE_COLOR, 0);
