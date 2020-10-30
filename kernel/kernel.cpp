@@ -20,6 +20,7 @@
 #include "../include/gdt/gdt.h"
 #include "../include/interrupts.h"
 #include "../include/port.h"
+#include "../include/time.h"
 
 #include "../include/io/keyboard.h"
 #include "../include/io/mouse.h"
@@ -163,6 +164,8 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     string str = "Hey user, Welcome to Fegeya Fusion!\n";
     
     printf(str, 10, 0);
+
+    PrintYear();
 
     do {
 	    show_buffer();

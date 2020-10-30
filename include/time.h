@@ -15,23 +15,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TYPES_H
-#define TYPES_H
 
-typedef char                     int8_t;
-typedef unsigned char           uint8_t;
-typedef short                   int16_t;
-typedef unsigned short         uint16_t;
-typedef int                     int32_t;
-typedef unsigned int           uint32_t;
-typedef long long int           int64_t;
-typedef unsigned long long int uint64_t;
-    
-typedef char* string;     
+#ifndef TIME_H
+#define TIME_H
 
-typedef long s32;
+#include "types.h"
 
-#define true 1
-#define false 0
+#define TIME_SECOND 0x00
+#define TIME_MINUTE 0x02
+#define TIME_HOUR 0x04
+#define TIME_DAY 0x07
+#define TIME_MONTH 0x08
+#define TIME_YEAR 0x09
 
-#endif // TYPES_H
+#define CMOS_ADDRESS 0x70
+#define CMOS_DATA 0x71
+
+#define from_bcd(val)  ((val / 16) * 10 + (val & 0xf))
+
+typedef struct {
+    uint8_t second;
+    uint8_t minute;
+    uint8_t hour;
+    uint8_t day;
+    uint8_t month;
+    uint32_t year;
+} time_t;
+ 
+
+time_t time();
+
+uint32_t time_get(uint32_t selector);
+
+void time_task();
+
+extern void PrintYear();
+
+#endif // TIME_H
