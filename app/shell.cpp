@@ -48,7 +48,7 @@ void reboot() {
     while (good & 0x02)
         good = Port8Bit::Read8(0x64);
     Port8Bit::Write8(0x64, 0xFE);
-    printf("If you see this message, power off this PC.", WHITE_COLOR, 0);
+    InitPrint("If you see this message, power off this PC.", false);
 loop:
     InitPrint("Halt the CPU", true);
     asm volatile ("hlt"); /* Halt the CPU */
