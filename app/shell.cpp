@@ -19,6 +19,7 @@
 #include "../include/app/fufetch.h"
 #include "../include/app/login.h"
 #include "../include/app/calc.h"
+#include "../include/app/date.h"
 
 #include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
@@ -38,6 +39,7 @@ void HelpFunction() {
     printf("fufetch : Simple system info application\n", RED_COLOR, 0);
     printf("calc : Calculator\n", RED_COLOR, 0);
     printf("logout : Logout from user\n", RED_COLOR, 0);
+    printf("date : Show system date\n", RED_COLOR, 0);
     printf("reboot : Reboot the system\n", RED_COLOR, 0);
     printf("test : String test\n", RED_COLOR, 0);
 	printf("help: :^)\n", RED_COLOR, 0);
@@ -89,6 +91,8 @@ int8_t RunShell() {
 	        RunCalculator();
 		} else if(compare(data, "logout") == 0) {
 	        logout = 1;		
+        } else if(compare(data, "date") == 0) {
+            RunDate();
         } else if(compare(data, "reboot") == 0) {
             reboot();
         } else if(compare(data, "") != 0) {
