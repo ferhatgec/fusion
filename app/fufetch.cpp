@@ -20,6 +20,8 @@
 #include "../include/lib/string.h"
 #include "../include/lib/stdlib.h"
 
+#include "../include/cpu/cpuid.h"
+
 #include "../include/io/input.h"
 #include "../include/types.h"
 #include "../include/vga/vga.h"
@@ -39,6 +41,8 @@ void ColorizedDate() {
     printf(itoa(time_get(TIME_YEAR)), LIGHT_CYAN_COLOR, 0);
 }
 
+
+
 void RunFuFetch() {
 	printf("       _______ ", GREEN_COLOR, 0);
     printf(DEFAULT_USERNAME, CYAN_COLOR, 0);
@@ -53,7 +57,7 @@ void RunFuFetch() {
 	
     printf("\n__  /  _____/  ", GREEN_COLOR, 0);
 	printf("CPUID: ", CYAN_COLOR, 0);
-	printf("Generic", LIGHT_BLUE_COLOR, 0);
+	detect_cpu();
 	printf("\n\\ \\/  /  ", GREEN_COLOR, 0);
 	printf("      Fusion version: ", CYAN_COLOR, 0);
 	printf(FUSION_VERSION, LIGHT_BLUE_COLOR, 0);

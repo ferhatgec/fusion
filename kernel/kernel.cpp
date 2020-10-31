@@ -148,8 +148,6 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
         _exit = AUTO_LOGIN;
     else
         _exit = RunLogin();
-    
-    detect_cpu();
 
     InitPrint("Checking auto-login", true); 
 

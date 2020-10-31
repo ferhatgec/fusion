@@ -79,7 +79,5 @@ int intel() {
             printf("Reserved", WHITE_COLOR, 0);
             break;
     }
-
-    printf("\n", WHITE_COLOR, 0);
 }
 
