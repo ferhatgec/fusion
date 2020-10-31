@@ -79,5 +79,25 @@ int intel() {
             printf("Reserved", WHITE_COLOR, 0);
             break;
     }
+
+    printf(" ", WHITE_COLOR, 0);
+    
+    switch(family) {
+		case 3:
+		    printf("i386", WHITE_COLOR, 0);
+		    break;
+		case 4:
+		    printf("i486", WHITE_COLOR, 0);
+		    break;
+		case 5:
+		    printf("Pentium", WHITE_COLOR, 0);
+		    break;
+		case 6:
+		    printf("Pentium Pro", WHITE_COLOR, 0);
+		    break;
+		case 15:
+		    printf("Pentium 4", WHITE_COLOR, 0);
+            break;	
+    }
 }
 
