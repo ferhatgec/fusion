@@ -4,7 +4,8 @@ LDPARAMS = -melf_i386
 
 app = shell.o calc.o fufetch.o login.o date.o
 lib = string.o stdlib.o
-objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o time.o kernel.o
+objects = loader.o gdt.o port.o interruptstubs.o mouse.o interrupts.o input.o keyboard.o time.o \
+          cpuid.o kernel.o
 
 run: fusion.iso
 	qemu-system-i386 -m 512M -cdrom fusion.iso

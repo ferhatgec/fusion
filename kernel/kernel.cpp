@@ -22,6 +22,7 @@
 #include "../include/port.h"
 #include "../include/time.h"
 
+#include "../include/cpu/cpuid.h"
 #include "../include/io/keyboard.h"
 #include "../include/io/mouse.h"
 #include "../include/vga/vga.h"
@@ -148,7 +149,8 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t /*multiboot
     else
         _exit = RunLogin();
     
-    
+    detect_cpu();
+
     InitPrint("Checking auto-login", true); 
 
     enable_cursor();
