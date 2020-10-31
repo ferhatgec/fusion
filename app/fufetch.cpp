@@ -56,10 +56,15 @@ void RunFuFetch() {
     ColorizedDate();
 	
     printf("\n__  /  _____/  ", GREEN_COLOR, 0);
-	printf("CPUID: ", CYAN_COLOR, 0);
-	detect_cpu();
+	printf("CPU Type: ", CYAN_COLOR, 0);
+	print_type();
+
 	printf("\n\\ \\/  /  ", GREEN_COLOR, 0);
 	printf("      Fusion version: ", CYAN_COLOR, 0);
 	printf(FUSION_VERSION, LIGHT_BLUE_COLOR, 0);
-	printf("\n \\/__/\n", GREEN_COLOR, 0);
+
+	printf("\n \\/__/   ", GREEN_COLOR, 0);
+    printf("      Family: ", CYAN_COLOR, 0);
+    print_family();    
+    printf("\n", WHITE_COLOR, 0);
 }

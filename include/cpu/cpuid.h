@@ -20,8 +20,32 @@
 
 #define cpuid(in, a, b, c, d) __asm__("cpuid": "=a" (a), "=b" (b), "=c" (c), "=d" (d) : "a" (in));
 
+typedef struct {
+    int model;
+    int family;
+    int type;
+    int brand;
+    int stepping;
+    int reserved; 
+} icpuid_t;
+
+typedef struct {
+    char* model;
+    char* family;
+    char* type;
+    char* brand;
+    char* stepping;
+    char* reserved;
+} cpuid_t;
+
+
+cpuid_t get_cpuid(icpuid_t);
+
 /* TODO: List of AMD & Intel ID's. */
-int detect_cpu(void);
-int intel(void);
+icpuid_t detect_cpu(void);
+icpuid_t intel(void);
+
+void print_type();
+void print_family();
 
 #endif // CPUID

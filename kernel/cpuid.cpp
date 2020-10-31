@@ -28,76 +28,99 @@
 #define INTEL_MAGIC_CODE 0x756e6547
 #define AMD_MAGIC_CODE 0x68747541
 
-
 void printf(char* str, unsigned char forecolor, unsigned char backcolor);
 
-int detect_cpu(void) {
+icpuid_t detect_cpu(void) {
     unsigned long ebx, unused;
-    
+    icpuid_t i_cpu;    
+
     cpuid(0, unused, ebx, unused, unused);
 
     switch(ebx) {
         case INTEL_MAGIC_CODE:
-            intel();
+            i_cpu = intel();
             break;
         default:
             printf("Generic (x86)\n", WHITE_COLOR, 0);
             break;
     }
 
-    return 0;
+    return i_cpu;
 }
 
-int intel() {
+icpuid_t intel() {
     unsigned long eax, ebx, ecx, edx, max_eax,
         signature, unused;
 
-    int model, family, type, brand, stepping, reserved;
+    icpuid_t icpu;
+
     int extended_family = -1;
 
     cpuid(1, eax, ebx, unused, unused);
 
-    model = (eax >> 4) & 0xf;
-    family = (eax >> 8) & 0xf;
-    type = (eax >> 12) & 0x3;
-    brand = ebx & 0xff;
-    stepping = eax & 0xf;
-    reserved = eax >> 14;
+    icpu.model = (eax >> 4) & 0xf;
+    icpu.family = (eax >> 8) & 0xf;
+    icpu.type = (eax >> 12) & 0x3;
+    icpu.brand = ebx & 0xff;
+    icpu.stepping = eax & 0xf;
+    icpu.reserved = eax >> 14;
     signature = eax;
 
-    switch(type) {
-        case 0:
-            printf("Original OEM", WHITE_COLOR, 0);
-            break;
-       case 1:
-            printf("Overdrive", WHITE_COLOR, 0);
-            break;       
-       case 2:
-            printf("Dual-capable", WHITE_COLOR, 0);
-            break;
-        case 3:
-            printf("Reserved", WHITE_COLOR, 0);
-            break;
-    }
-
-    printf(" ", WHITE_COLOR, 0);
-    
-    switch(family) {
-		case 3:
-		    printf("i386", WHITE_COLOR, 0);
-		    break;
-		case 4:
-		    printf("i486", WHITE_COLOR, 0);
-		    break;
-		case 5:
-		    printf("Pentium", WHITE_COLOR, 0);
-		    break;
-		case 6:
-		    printf("Pentium Pro", WHITE_COLOR, 0);
-		    break;
-		case 15:
-		    printf("Pentium 4", WHITE_COLOR, 0);
-            break;	
-    }
+    return icpu;
 }
 
+cpuid_t get_cpuid(icpuid_t _icpuid) {
+    cpuid_t _cpuid;
+
+    switch(_icpuid.type) {
+        case 0:
+            _cpuid.type = "Original OEM";
+            break;
+        case 1:
+            _cpuid.type = "Overdrive";
+            break;       
+        case 2:
+            _cpuid.type = "Dual-capable";
+            break;
+        case 3:
+            _cpuid.type = "Reserved";
+            break;
+    }
+
+    switch(_icpuid.family) {
+		case 3:
+            _cpuid.family = "i386";		    
+            break;
+		case 4:
+            _cpuid.family = "i486";		    
+            break;
+		case 5:
+            _cpuid.family = "Pentium";
+		    break;
+		case 6:
+            _cpuid.family = "Pentium Pro";
+		    break;
+		case 15:
+            _cpuid.family = "Pentium 4";
+            break;
+    }
+
+    return _cpuid;
+}
+
+
+void print_type() {
+    icpuid_t icpu = detect_cpu();
+
+    cpuid_t cpu_type = get_cpuid(icpu);
+    
+    printf(cpu_type.type, WHITE_COLOR, 0);
+}
+
+void print_family() {
+    icpuid_t icpu = detect_cpu();
+
+    cpuid_t cpu_family = get_cpuid(icpu);
+    
+    printf(cpu_family.family, WHITE_COLOR, 0);
+}
