@@ -1,6 +1,7 @@
 GCCPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -Wno-write-strings
 ASPARAMS = --32
 LDPARAMS = -melf_i386
+MKRESCUE = grub2-mkrescue
 
 app = shell.o calc.o fufetch.o login.o date.o
 lib = string.o stdlib.o
@@ -11,24 +12,24 @@ run: fusion.iso
 	qemu-system-i386 -m 512M -cdrom fusion.iso
 	
 %.o: app/%.cpp
-	gcc $(GCCPARAMS) -c -o $@ $<
+	$(CC) $(GCCPARAMS) -c -o $@ $<
 	
 %.o: lib/%.cpp
-	gcc $(GCCPARAMS) -c -o $@ $<
+	$(CC) $(GCCPARAMS) -c -o $@ $<
 	
 %.o: kernel/%.cpp
-	gcc $(GCCPARAMS) -c -o $@ $<
+	$(CC) $(GCCPARAMS) -c -o $@ $<
 
 %.o: %.s
-	as $(ASPARAMS) -o $@ $<
+	$(AS) $(ASPARAMS) -o $@ $<
 
 fusion.bin: linker.ld $(objects) $(lib) $(app)
-	ld $(LDPARAMS) -T $< -o $@ $(objects) $(lib) $(app)
+	$(LD) $(LDPARAMS) -T $< -o $@ $(objects) $(lib) $(app)
 
 fusion.iso: fusion.bin
-	mkdir iso
-	mkdir iso/boot
-	mkdir iso/boot/grub
+	mkdir -p iso
+	mkdir -p iso/boot
+	mkdir -p iso/boot/grub
 	cp fusion.bin iso/boot/fusion.bin
 	echo 'set timeout=5'                      > iso/boot/grub/grub.cfg
 	echo 'set default=0'                     >> iso/boot/grub/grub.cfg
@@ -37,8 +38,8 @@ fusion.iso: fusion.bin
 	echo '  multiboot /boot/fusion.bin'    >> iso/boot/grub/grub.cfg
 	echo '  boot'                            >> iso/boot/grub/grub.cfg
 	echo '}'                                 >> iso/boot/grub/grub.cfg
-	grub2-mkrescue --output=fusion.iso iso
-	rm -f $(objects) $(lib) $(app) fusion.bin
+	${MKRESCUE} --output=fusion.iso iso
+	${RM} $(objects) $(lib) $(app) fusion.bin
 	rm -rf iso
 
 install: fusion.bin
@@ -46,4 +47,5 @@ install: fusion.bin
 
 .PHONY: clean
 clean:
-	rm -f $(objects) $(lib) $(app) fusion.bin fusion.iso
+	$(RM) $(objects) $(lib) $(app) fusion.bin fusion.iso
+	rm -rf iso
